@@ -151,3 +151,7 @@ dmypy.json
 cython_debug/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
+
+
+# Pycharm 생성 폴더 .idea 무시
+.idea/
