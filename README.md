@@ -1,4 +1,5 @@
 # Django_Tutorial
+- BookMark App
 
 ## 📔 기본 Django 셋팅
 - 참고 사이트: https://blog.naver.com/ssi02014/222542275091
