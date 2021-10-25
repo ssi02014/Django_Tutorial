@@ -15,7 +15,34 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+schema_url_patterns = [
+    path('api/', include('studyApp.urls')),
+]
+
+if settings.DEBUG:
+    title = 'MJ API'
+    version = 'v1'
+    base_url = '/api'
+    sv = get_schema_view(
+        openapi.Info(
+            title=title,
+            default_version=version,
+            description=f"Cameriere {version} Api List",
+            terms_of_service="https://www.google.com/policies/terms/",
+            contact=openapi.Contact(email="ssi02014@naver.com"),
+            license=openapi.License(name="MJ License"),
+        ),
+        permission_classes=(permissions.AllowAny,),
+        patterns=schema_url_patterns
+    )
+    urlpatterns = [path('api/docs/', sv.with_ui('swagger', cache_timeout=0)), ] + urlpatterns
