@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&&s7(@0(qg)bzc6ro04#$g_83y9g5apm4_olae66u#z7#_839e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.219.104', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.219.xxx', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'drf_yasg',
-    'studyApp'
+    'studyApp.app.StudyappConfig'
 ]
 
 MIDDLEWARE = [
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'study.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # dirs 항목은 프로젝트 템플릿 파일이 위치할 디렉터리를 지정한다.
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,21 +105,25 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'  # 사용언어 한글 지정
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'  # 세계 표준시(UTC) -> 한국 시간(Asia/Seoul)
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False  # False 일 경우 DB에 저장되는 시간도 한국 시간으로 저장된다.
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+MEDIA_URL = '/media/'
+MEDIA_DIRS = [os.path.join(BASE_DIR, 'media')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
